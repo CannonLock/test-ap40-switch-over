@@ -1,0 +1,26 @@
+# Stage 0: AP40 today. Values copied from AP40's running config; only the ones that decide which
+# issuers the exports trust, and the URLs those issuers are built from.
+#
+# Differences from AP40 (all stages): the federation behind DiscoveryUrl is the local test one,
+# and the storage prefixes are empty tmpfs mounts.
+Logging:
+  Origin:
+    Scitokens: trace
+Server:
+  Hostname: ap40.uw.osg-htc.org
+  ExternalWebUrl: https://ap40.uw.osg-htc.org:8444
+  WebPort: 8444
+  IssuerUrl: https://osg-htc.org/ospool
+Federation:
+  DiscoveryUrl: https://osg-htc.org
+Origin:
+  StorageType: posix
+  EnableIssuer: false
+  IssuerMode: embedded
+  Exports:
+    - FederationPrefix: /ospool/ap40/
+      StoragePrefix: /storage/ap40/
+      Capabilities: ["DirectReads", "Writes", "Reads", "Listings"]
+    - FederationPrefix: /ospool/uw-shared/projects/
+      StoragePrefix: /storage/uw-shared/projects/
+      Capabilities: ["DirectReads", "Writes", "Reads", "Listings"]
